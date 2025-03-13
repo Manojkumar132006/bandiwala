@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const axios = require('axios')
+const { sendText } = require('./utils/responses')
 
 app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode']
@@ -30,22 +30,3 @@ app.post('/webhook', (req, res) => {
 app.listen(process.env.PORT, () => {
     console.log("Server is running on port", process.env.PORT)
 })
-
-async function sendText(to,body){
-    await axios({
-        url: `https://graph.facebook.com/v22.0/${process.env.ID}/messages`,
-        method: 'post',
-        headers: {
-            'Authorization':`Bearer ${process.env.ACCESS_TOKEN}`,
-            'Content-Type': 'application/json'
-        },
-        data:JSON.stringify({
-            messaging_product:'whatsapp',
-            to,
-            type:'text',
-            text:{
-                body
-            }
-        })
-    })
-}

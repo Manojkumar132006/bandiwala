@@ -19,7 +19,8 @@ export function createOrder(amount,customer,items){
             sms: true
         },
         notes:{
-            description:`${items}`
+            description:`${items}`,
+            id: customer.id
         },
         remainder_enable: true,
         callback_url:'',
@@ -28,4 +29,8 @@ export function createOrder(amount,customer,items){
         Order =JSON.parse(order);
     })
     return Order
+}
+
+export function cancel(paylink){
+    rzp.paymentLink.cancel(paylink)
 }

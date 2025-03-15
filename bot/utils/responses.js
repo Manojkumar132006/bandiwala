@@ -21,6 +21,55 @@ async function sendText(to,body){
 
 async function sendTemplate(to,template){
     await axios({
-        
+        url: `https://graph.facebook.com/v22.0/${process.env.ID}/messages`,
+        method: 'post',
+        headers: {
+            'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to,
+            type: 'template',
+            template: {
+                name: template,
+                language: {
+                    code: 'en'
+                }
+            }
+        })
     })
+}
+
+async function sendList(to, sections) {
+    await axios({
+        url: `https://graph.facebook.com/v22.0/${process.env.ID}/messages`,
+        method: 'post',
+        headers: {
+            'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify({
+            messaging_product: 'whatsapp',
+            to,
+            type: 'interactive',
+            interactive: {
+                type: 'list',
+                header: {
+                    type: 'text',
+                    text: 'Menu'
+                },
+                action: {
+                    button: 'Continue',
+                    sections: sections
+                }
+            }
+        })
+    })
+}
+
+module.exports = {
+    sendText,
+    sendTemplate,
+    sendList
 }

@@ -17,10 +17,10 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
     const message = req.body['entry'][0]['messages'][0]
     if(message.type === 'text') {
-        if(message.text.lower() === 'hello') {
-            sendText(message.from, 'hi')
+        if(message.text.lower() !== 'restart') {
+            sendTemplate(message.from, 'restart')
         }else{
-            sendText(message.from, 'I don\'t understand')
+            sendTemplate(message.from, 'init')
         }
 
     }

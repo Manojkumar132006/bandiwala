@@ -18,3 +18,9 @@ async function sendText(to,body){
         })
     })
 }
+
+async function sendTemplate(to,template){
+    await axios({
+        
+    })
+}

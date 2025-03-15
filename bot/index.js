@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const { sendText } = require('./utils/responses')
+const { sendText,sendTemplate } = require('./utils/responses')
 
 app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode']
@@ -21,6 +21,12 @@ app.post('/webhook', (req, res) => {
             sendText(message.from, 'hi')
         }else{
             sendText(message.from, 'I don\'t understand')
+        }
+
+    }
+    else if(message.type === 'interactive'){
+        if(message.interactive.type === 'list_reply'){
+            sendTemplate(message.from,`${message.interactive.list_reply.title}`)
         }
 
     }

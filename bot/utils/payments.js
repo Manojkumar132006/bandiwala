@@ -23,8 +23,8 @@ export function createOrder(amount,customer,items){
             id: customer.id
         },
         remainder_enable: true,
-        callback_url:'',
-        callback_method:''
+        callback_url:`${process.env.BASE_URL}/manage`,
+        callback_method:'post'
     },(err,order)=>{
         Order =JSON.parse(order);
     })

@@ -11,16 +11,14 @@ export function createOrder(amount,customer,items){
         currency: 'INR',
         accept_partial: false,
         customer:{
-            name: customer.name,
-            email: customer.email,
-            contact: customer.phone
+            contact: customer
         },
         notify:{
             sms: true
         },
         notes:{
             description:`${items}`,
-            id: customer.id
+            id: customer
         },
         remainder_enable: true,
         callback_url:`${process.env.BASE_URL}/manage`,

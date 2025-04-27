@@ -40,6 +40,10 @@ app.post('/webhook', async(req, res) => {
 
 })
 
+app.post('/manage',(req,res)=>{
+    
+})
+
 app.listen(process.env.PORT, () => {
     console.log("Server is running on port", process.env.PORT)
 })
